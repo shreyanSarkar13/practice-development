@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import { logger, logger1, logger2, logger3 } from "./middleware/logger.js";
 import productRoutes from "./routes/productRoutes.js";
 import pool from "./db/db.js";
+import errorHandler from "./middleware/errorHandler.js";
+import authRoutes from "./routes/authRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -15,7 +17,12 @@ app.use(logger1);
 app.use(logger2);
 app.use(logger3);
 
-app.use("/", productRoutes);
+app.use(productRoutes);
+app.use(authRoutes);
+
+app.use(errorHandler);
+
+//app.use("/", productRoutes);
 /*
 async function testDatabase() {
     try {

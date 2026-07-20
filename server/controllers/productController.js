@@ -69,9 +69,14 @@ export function getProducts(req, res) {
 }*/
 
 /* NEW FETCH*/
-export async function getProducts(req, res) {
-    const result = await pool.query("SELECT * FROM items_list");
-    res.json(result.rows);
+export async function getProducts(req, res, next) {
+    try {
+        const result = await pool.query("SELECT * FROM items_list");
+        res.json(result.rows);
+    }
+    catch (error) {
+        next(error);
+    }
 }/*
 export function getProductsId(req, res) {
     const id = Number(req.params.id);
@@ -85,14 +90,19 @@ export function getProductsId(req, res) {
 }*/
 
 /*NEW FETCH*/
-export async function getProductsId(req, res) {
-    const id = Number(req.params.id);
-    const sql = "SELECT * FROM items_list where id = $1";
-    const result = await pool.query(sql, [id]);
-    if (result.rows.length === 0) {
-        res.status(404).send("Product not found");
+export async function getProductsId(req, res, next) {
+    try {
+        const id = Number(req.params.id);
+        const sql = "SELECT * FROM items_list where id = $1";
+        const result = await pool.query(sql, [id]);
+        if (result.rows.length === 0) {
+            return res.status(404).send("Product not found");
+        }
+        res.json(result.rows);
     }
-    res.json(result.rows);
+    catch (error) {
+        next(error);
+    }
 }
 /*
 export function addProducts(req, res) {
@@ -119,6 +129,16 @@ export function addProducts(req, res) {
 /*NEW FETCH*/
 export async function addProducts(req, res) {
     const { name, price } = req.body;
+    if (name.trim() === '') {
+        return res.status(400).json({
+            message: "please provide name of item"
+        });
+    }
+    if (price <= 0 || typeof price !== "number") {
+        return res.status(400).json({
+            message: "please provide valid price"
+        });
+    }
     const sql = "INSERT INTO items_list(name,price)VALUES($1,$2)";
     const result = await pool.query(sql, [name, price]);
     res.status(201).json(result.rows[0]);
@@ -142,7 +162,7 @@ export function updateProduct(req, res) {
         message: "Product updated",
         product: products[index]
     })
-}
+}/*
 export function deleteProduct(req, res) {
     const id = Number(req.params.id);
     const product = products.find((p) => p.id === id)
@@ -157,4 +177,19 @@ export function deleteProduct(req, res) {
     res.json({
         message: "Product deleted",
     })
+}*/
+/*NEW FETCH*/
+export async function deleteProduct(req, res, next) {
+    try {
+        const id = Number(req.params.id);
+        const sql = "DELETE FROM items_list where id = $1";
+        const result = await pool.query(sql, [id]);
+        if (result.rows.length === 0) {
+            return res.status(404).send("Product not found");
+        }
+        res.json(result.rows);
+    }
+    catch (error) {
+        next(error);
+    }
 }

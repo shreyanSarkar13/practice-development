@@ -2,7 +2,7 @@
 async function addItems() {
     try {
         const name = document.getElementById("name").value;
-        const price = document.getElementById("price").value;
+        const price = Number(document.getElementById("price").value);
 
         const response = await fetch("http://localhost:1000/products", {
             method: "POST",

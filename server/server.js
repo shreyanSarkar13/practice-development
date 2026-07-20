@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { logger, logger1, logger2, logger3 } from "./middleware/logger.js";
 import productRoutes from "./routes/productRoutes.js";
+import pool from "./db/db.js";
 dotenv.config();
 
 const app = express();
@@ -15,8 +16,18 @@ app.use(logger2);
 app.use(logger3);
 
 app.use("/", productRoutes);
+/*
+async function testDatabase() {
+    try {
+        const result = await pool.query("SELECT * FROM items_list");
+        console.log(result.rows);
+    } catch (err) {
+        console.error(err);
+    }
+}
 
-
+testDatabase();
+*/
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`);
 });

@@ -24,6 +24,23 @@ async function addItems() {
     }
 }
 
+async function authUser() {
+    const response = await fetch("http://localhost:1000/auth/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            name: "Sophie",
+            email: "sophie@gmail.com",
+            password: "hello12345"
+        })
+    });
+    const data = await response.json();
+    console.log(data);
+}
+authUser();
+
 async function sendData() {
     const response = await fetch("http://localhost:1000/products", {
         method: "POST",

@@ -17,8 +17,8 @@ app.use(logger1);
 app.use(logger2);
 app.use(logger3);
 
-app.use(productRoutes);
-app.use(authRoutes);
+app.use("/items", productRoutes);
+app.use("/auth", authRoutes);
 
 app.use(errorHandler);
 

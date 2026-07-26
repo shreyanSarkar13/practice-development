@@ -139,7 +139,7 @@ export async function addProducts(req, res) {
             message: "please provide valid price"
         });
     }
-    const sql = "INSERT INTO items_list(name,price)VALUES($1,$2)";
+    const sql = "INSERT INTO items_list(name,price)VALUES($1,$2)returning*";
     const result = await pool.query(sql, [name, price]);
     res.status(201).json(result.rows[0]);
 }

@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Title</title>
+    <title>Product Studio</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <div class="shell">
+        <section class="hero-panel" aria-label="Studio summary">
+            <div class="eyebrow">Product Studio</div>
+            <h1>Add products beautifully.</h1>
+            <p>Keep your workflow smooth and polished with a modern form experience.</p>
+        </section>
 
-    <h1>Backend Testing</h1>
-    <button onclick="show()">click me</button>
-    <div>
-        <h1 id='heading'></h1>
+        <section class="form-card">
+            <div class="icon-badge">✦</div>
+            <h2>Add a New Product</h2>
+            <p class="subtitle">Fill in the details below to register a product seamlessly.</p>
+            <form id="productForm">
+                <label for="name">Product Name</label>
+                <input type="text" id="name" placeholder="e.g. Aurora Headphones" required>
+
+                <label for="price">Price</label>
+                <input type="number" id="price" min="1" step="0.01" placeholder="e.g. 1299" required>
+
+                <button type="submit" id="submitBtn">Create Product</button>
+            </form>
+            <div id="statusMessage" class="status-message" role="status" aria-live="polite">Ready to submit your product.</div>
+        </section>
     </div>
-    <form>
-        <label for="fname">Name:</label><br>
-        <input type="text" id="name"><br>
-        <label for="price">Price:</label><br>
-        <input type="number" id="price"><br><br>
 
-        <button type="button" onclick="addItems()">Submit</button>
-    </form>
     <script src="script.js"></script>
 </body>
-
 </html>

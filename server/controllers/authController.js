@@ -38,7 +38,7 @@ export const register = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-    const { email, password } = req.body;
+    const {name, email, password } = req.body;
 
     if (!email || !password) {
         return res.status(400).json({
@@ -47,7 +47,7 @@ export const login = async (req, res, next) => {
     }
     const sql = "SELECT * FROM USERS_LIST WHERE EMAIL = $1";
     const result = await pool.query(sql, [email]);
-    if (result.rows === 0) {
+    if (result.rows.length === 0) {
         return res.status(400).json({
             message: "Invalid Email or password"
         });
@@ -55,7 +55,7 @@ export const login = async (req, res, next) => {
     const user = result.rows[0];
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-        return res.stays(400).json({
+        return res.status(400).json({
             message: "Invalid Email or Password"
         });
     }

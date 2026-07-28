@@ -72,6 +72,7 @@ export function getProducts(req, res) {
 export async function getProducts(req, res, next) {
     try {
         const result = await pool.query("SELECT * FROM items_list");
+        //console.log(result.rows);
         res.json(result.rows);
     }
     catch (error) {

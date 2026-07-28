@@ -6,7 +6,11 @@ import productRoutes from "./routes/productRoutes.js";
 import pool from "./db/db.js";
 import errorHandler from "./middleware/errorHandler.js";
 import authRoutes from "./routes/authRoutes.js";
-dotenv.config();
+
+const result = dotenv.config();
+
+console.log(result);
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
 
 const app = express();
 

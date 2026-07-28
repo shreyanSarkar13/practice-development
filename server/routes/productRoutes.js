@@ -8,6 +8,8 @@ import {
     deleteProduct
 } from "../controllers/productController.js";
 
+import { authenticate } from "../middleware/authMiddleware.js";
+
 const router = express.Router();
 
 router.get("/", serverStart);
@@ -17,7 +19,7 @@ router.get("/test", test);
 router.get("/api", api);
 router.get("/api/docs", docs);
 router.post("/users", users);
-router.get("/products", getProducts);
+router.get("/products", authenticate, getProducts);
 router.get("/products/:id", getProductsId);
 router.post("/products", addProducts);
 router.put("/products/:id", updateProduct);

@@ -19,7 +19,7 @@ router.get("/test", test);
 router.get("/api", api);
 router.get("/api/docs", docs);
 router.post("/users", users);
-router.get("/products", authenticate, getProducts);
+router.get("/products",authenticate, getProducts);
 router.get("/products/:id", getProductsId);
 router.post("/products", addProducts);
 router.put("/products/:id", updateProduct);

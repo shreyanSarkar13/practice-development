@@ -5,11 +5,6 @@ import jwt from "jsonwebtoken";
 export const register = async (req, res, next) => {
     try {
         const { name, email, password } = req.body;
-        if (!name || !email || !password) {
-            return res.status(400).json({
-                message: "Please provide name, email and password"
-            });
-        }
         const sql = "SELECT * FROM USERS_LIST WHERE email = $1";
         const result = await pool.query(sql, [email]);
 

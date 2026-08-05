@@ -9,6 +9,7 @@ import {
 } from "../controllers/productController.js";
 
 import { authenticate } from "../middleware/authMiddleware.js";
+import authorize from "../middleware/authorize.js";
 
 const router = express.Router();
 
@@ -19,10 +20,10 @@ router.get("/test", test);
 router.get("/api", api);
 router.get("/api/docs", docs);
 router.post("/users", users);
-router.get("/products",authenticate, getProducts);
+router.get("/products", authenticate, getProducts);
 router.get("/products/:id", getProductsId);
-router.post("/products", addProducts);
-router.put("/products/:id", updateProduct);
+router.post("/products", authenticate, authorize("admin"), addProducts);
+router.put("/products/:id", authenticate, updateProduct);
 router.delete("/product/:id", deleteProduct);
 
 export default router;

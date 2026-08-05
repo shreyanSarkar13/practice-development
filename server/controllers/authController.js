@@ -17,15 +17,16 @@ export const register = async (req, res, next) => {
         console.log(name, email, password);
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await pool.query(
-            `INSERT INTO users_list (name, email, password)
-            VALUES ($1, $2, $3)
+            `INSERT INTO users_list (name, email, password, role)
+            VALUES ($1, $2, $3, $4)
             RETURNING id, name, email`,
-            [name, email, hashedPassword]
+            [name, email, hashedPassword,"user"]
         );
         return res.status(201).json({
             message: "User registered successfully",
             user: newUser.rows[0]
         });
+        next();
     }
     catch (error) {
         next(error);

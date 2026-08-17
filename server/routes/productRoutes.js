@@ -1,7 +1,7 @@
 import express from "express";
 import {
     serverStart, search, searchId, test, api, docs, users,
-    getProducts,
+    getAllProductsController,
     getProductsId,
     addProducts,
     updateProduct,
@@ -20,7 +20,7 @@ router.get("/test", test);
 router.get("/api", api);
 router.get("/api/docs", docs);
 router.post("/users", users);
-router.get("/products", authenticate, getProducts);
+router.get("/products", authenticate, getAllProductsController);
 router.get("/products/:id", getProductsId);
 router.post("/products", authenticate, authorize("admin"), addProducts);
 router.put("/products/:id", authenticate, updateProduct);

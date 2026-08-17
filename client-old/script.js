@@ -13,10 +13,13 @@ async function addItems() {
         const name = document.getElementById("name").value;
         const price = Number(document.getElementById("price").value);
 
+        const token = localStorage.getItem("token");
+
         const response = await fetch("http://localhost:1000/items/products", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 name: name,

@@ -1,5 +1,6 @@
 import products from "../data/products.js";
 import pool from "../db/db.js"
+import { getProducts } from "../services/productService.js";
 
 export function serverStart(req, res) {
     res.status(200).send("Server Running");
@@ -69,11 +70,13 @@ export function getProducts(req, res) {
 }*/
 
 /* NEW FETCH*/
-export async function getProducts(req, res, next) {
+export async function getAllProductsController(req, res, next) {
     try {
-        const result = await pool.query("SELECT * FROM items_list");
+        //const result = await pool.query("SELECT * FROM items_list");
         //console.log(result.rows);
-        res.json(result.rows);
+        //res.json(result.rows);
+        const products = await getProducts();
+        res.status(200).json(products);
     }
     catch (error) {
         next(error);

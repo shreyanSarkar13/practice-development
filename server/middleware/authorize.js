@@ -6,7 +6,7 @@ const authorize = (...allowedRoles) => {
             const userId = req.user.id;
             const sql = "SELECT role FROM users_list WHERE id = $1";
             const result = await pool.query(sql, [userId]);
-            if(result.rows.length === 0) {
+            if (result.rows.length === 0) {
                 return res.status(404).json({
                     message: "User not found"
                 });

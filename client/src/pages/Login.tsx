@@ -12,11 +12,8 @@ function Login() {
     const handleLogin = async () => {
         try {
             const data = await loginUser(name, email, password);
-
             console.log(data);
-
             localStorage.setItem("token", data.token);
-
             navigate("/products");
         } catch (error) {
             console.error(error);
@@ -51,6 +48,14 @@ function Login() {
             <button onClick={handleLogin}>
                 Login
             </button>
+
+            <p>
+                Don't have an account?{" "}
+                <button onClick={() => navigate("/register")}>
+                    Register
+                </button>
+            </p>
+
         </div>
     );
 }

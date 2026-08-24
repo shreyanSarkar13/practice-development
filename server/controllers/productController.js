@@ -188,10 +188,15 @@ export async function deleteProduct(req, res, next) {
         const id = Number(req.params.id);
         const sql = "DELETE FROM items_list where id = $1";
         const result = await pool.query(sql, [id]);
-        if (result.rows.length === 0) {
-            return res.status(404).send("Product not found");
+        if (result.rowCount === 0) {
+            return res.status(404).json({
+                message: "Product not found",
+            });
         }
-        res.json(result.rows);
+
+        res.status(200).json({
+            message: "Product deleted successfully",
+        });
     }
     catch (error) {
         next(error);

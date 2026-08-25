@@ -1,5 +1,5 @@
 export async function loginUser(name: string, email: string, password: string) {
-    const response = await fetch("http://localhost:1000/auth/login", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export async function registerUser(
     password: string
 ) {
     const response = await fetch(
-        "http://localhost:1000/auth/register",
+        `${import.meta.env.VITE_API_URL}/auth/register`,
         {
             method: "POST",
 
@@ -56,7 +56,7 @@ export async function getProducts() {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-        "http://localhost:1000/items/products",
+        `${import.meta.env.VITE_API_URL}/items/products`,
         {
             method: "GET",
             headers: {
@@ -78,7 +78,7 @@ export async function addProduct(name: string, price: number) {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-        "http://localhost:1000/items/products",
+        `${import.meta.env.VITE_API_URL}/items/products`,
         {
             method: "POST",
             headers: {
@@ -105,7 +105,7 @@ export async function deleteProduct(id: number) {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-        `http://localhost:1000/items/products/${id}`,
+        `${import.meta.env.VITE_API_URL}/items/products/${id}`,
         {
             method: "DELETE",
             headers: {

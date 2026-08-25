@@ -13,11 +13,8 @@ const authorize = (...allowedRoles) => {
             }
             const userRole = result.rows[0].role;
             console.log("AUTH DEBUG:", {
-                userId,
-                userRole,
-                allowedRoles,
-                roleType: typeof userRole,
-                allowedRoleTypes: allowedRoles.map(role => typeof role),
+                userRole: JSON.stringify(userRole),
+                allowedRoles: JSON.stringify(allowedRoles),
                 isAllowed: allowedRoles.includes(userRole)
             });
             if (!allowedRoles.includes(userRole)) {

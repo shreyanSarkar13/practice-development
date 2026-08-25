@@ -12,6 +12,11 @@ const authorize = (...allowedRoles) => {
                 });
             }
             const userRole = result.rows[0].role;
+            console.log("AUTH DEBUG:", {
+                userId,
+                userRole,
+                allowedRoles
+            });
             if (!allowedRoles.includes(userRole)) {
                 return res.status(403).json({
                     message: "Access denied."

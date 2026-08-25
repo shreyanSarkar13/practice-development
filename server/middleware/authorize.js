@@ -11,7 +11,7 @@ const authorize = (...allowedRoles) => {
                     message: "User not found"
                 });
             }
-            const userRole = result.rows[0].role;
+            const userRole = result.rows[0].role.trim();
             console.log("AUTH DEBUG:", {
                 userRole: JSON.stringify(userRole),
                 allowedRoles: JSON.stringify(allowedRoles),
